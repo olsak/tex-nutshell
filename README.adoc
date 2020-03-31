@@ -1,0 +1,5 @@
+= TeX in a Nutshell
+
+A short document about TeX principles
+
+see https://ctan.org/pkg/tex-nutshell

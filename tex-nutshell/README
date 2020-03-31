@@ -1,0 +1,19 @@
+
+Document: TeX in a nutshell
+
+Author: Petr Olsak, <petr@olsak.net>
+        Czech Technical University in Prague
+
+This software is in public domain.
+
+The pure TeX features are described here.
+The main goal of this document is its brevity.
+I hope that this document can be useful for somebody 
+who is looking for information about basics of TeX.
+
+Files:
+tex-nutshell.tex ... source file
+tex-nutshell.pdf ... the document
+
+Version:
+See the end of the document.
