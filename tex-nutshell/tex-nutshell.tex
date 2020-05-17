@@ -130,8 +130,9 @@ More about this primitive syntax is in sections~\ref[reg], \ref[expand] and~\ref
 
 When a control sequence `\TeX` with meaning \"macro" occurs in the
 input stream, then it is \ii expansion {\em expanded} to its replacement text, i.e.\ the sequence of
-typesetting material and primitive commands, in our case, the `\TeX` macro. 
-The logo \TeX/ is printed as a result of this processing.
+typesetting material and primitive commands. The `\TeX` macro
+expands to `T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX` and 
+the logo \TeX/ is printed as a result of this processing.
 
 None of the control sequences have their definitive meaning. A control sequence
 could change its meaning by re-defining it as a new macro (using `\def`), 
@@ -139,7 +140,7 @@ redeclaring it as an arbitrary object in \TeX/ (using \i let `\let`), etc.
 When you re-define a primitive control sequence then the access to its value
 or built-in algorithm is lost. This is a reason why \ii OpTeX \OpTeX/ macros duplicate
 all primitive sequences (\i hbox `\hbox` and `\_hbox`) with the same meaning and use
-only \"private" control sequences (prefixed by `_`. So, a user can re-define 
+only \"private" control sequences (prefixed by `_`). So, a user can re-define 
 `\hbox` without the loss of the primitive command `\_hbox`.
 
 \sec Formats, engines
@@ -238,7 +239,7 @@ program (\TeX/ distributions do this automatically during their installation).
 
 The lines from input files are first transformed by the \ii tokenizer {\em tokenizer}.
 It reads input lines and generates a sequence of tokens. These are the
-main goals of the tokenizer.
+main goals of the tokenizer:
 
 \begitems
 * It converts each control sequence to a single token characterized by its name.
@@ -248,7 +249,7 @@ main goals of the tokenizer.
   can continue on the next input line and one space token is added between the last word
   on the previous line and the first word on the next line.
 * The comment character `%` is ignored and all the text after it to the end of line
-  is ignored too. No space is added.
+  is ignored too. No space is generated at the end of this line.
 * Spaces from the begining of each line are ignored. Thus, you can
   use arbitrary indentation in your source file without changing the result.
 * Each empty line (or line with only spaces) is transformed to the token
@@ -274,7 +275,7 @@ character.
   The main syntactic rule is: each subsequence of tokens treated by macros
   or primitive commands must have these pairs of tokens balanced. There is no
   exception. The tokenizer treats them as special tokens with meaning
-  \"opening character" and \"closing character".
+  \"opening character\c1" and \"closing character\c2".
 * `%`\c{14}\quad -- comment character, removed by the tokenizer, along with
   everything that follows it on the line.
 * `$`\c3, `&`\c4, `#`\c6, `^`\c7, `_`\c8, `~`\c{13}\quad -- 
@@ -312,7 +313,7 @@ Each control sequence is built by the tokenizer starting from `\`\c0. Its name i
 a continuous sequence of letters\c{11} finalized by the first non-letter. 
 Note that \OpTeX/ sets
 `_` as letter\c{11}, thus control sequence names can include this character.
-\LaTeX/ sets the `@` as letter\c{12} when reading styles and macro files.
+\LaTeX/ sets the `@` as letter\c{11} when reading styles and macro files.
 You can look to such files and you will see many such characters inside
 private control sequence names declared by \LaTeX/ macros.
 
@@ -372,7 +373,7 @@ character with a given Unicode.
 When the main processor creates the typesetting output, it alternates
 between vertical and horizontal mode. It starts in \ii vertical/mode,@ {\em vertical mode}: all
 materials are put vertically below in this mode. For example
-\i hbox `\hbox{a}\hbox{b}\hbox{c}` creates c below b and b below a in vertical mode.
+\i hbox `\hbox{a}\hbox{b}\hbox{c}` creates a above b above c in vertical mode.
 
 If something is incompatible with the vertical mode principle --- a special
 command working only in horizontal mode or a character itself ---
@@ -475,7 +476,7 @@ But it is not true...
 \endtt
 %
 Why does the example above not create the paragraph with a 5\,cm width?
-The empty line \i par (`\par`) command is placed {\em after} the group is finished, so the
+The empty line \i par (`\par` command) is placed {\em after} the group is finished, so the
 \i hsize `\hsize` parameter has its previous value at the time when the paragraph is
 completed, not the value 5\,cm. The value of the \i hsize `\hsize` register\fnote
 {and about twenty other registers which declare the paragraph design}
@@ -502,7 +503,7 @@ characters encapsulated as one typesetting element
 with its height, depth and width is
 called a \ii box {\em box}. Boxes are placed next to each other (from left to
 right\fnote{There is an exception for special languages.})
-in horizontal mode or one above another in vertical mode. 
+in horizontal mode or one below another in vertical mode. 
 
 The boxes can include individual characters or spaces or boxes. The boxes can
 include more boxes. Paragraph lines are boxes. The page box includes paragraph
@@ -615,7 +616,7 @@ modes where glues are created by \i vskip `\vskip` commands instead of `\hskip`
 commands. You can
 write \i vbox `\vbox to<size>{...}` and do experiments.
 
-If a glue is put on the horizontal data row in horizontal mode and the
+When the
 paragraph breaking algorithm decides about the suitable breakpoints for creating
 lines with the desired width \i hsize `\hsize`, then each glue is a potentially breakable
 point. Each glue can be preceded by a \ii penalty {\em penalty} value (created by the
@@ -635,7 +636,7 @@ means \"impossible to break". A negative penalty means a bonus for the paragraph
 breaking algorithm. The penalty $-10000$ or less means \"you must break here".
 
 The paragraph breaking algorithm tries to find an optimum of breakpoint
-positions concerning all penalties, to all badnesses of all created lines and to
+positions concerning to all penalties, to all badnesses of all created lines and to
 many more values not mentioned here in this brief document.
 The analogous optimal breakpoint is found in vertical material when \TeX/
 breaks it into pages.
@@ -723,7 +724,8 @@ example:
 Note that there are two possibilities of how to write real macro
 parameters when a macro is in use. The parameter is one token by default but
 if there is `{<something>}` then the parameter is `<something>`. The braces
-here are delimiters for the real parameter.
+here are delimiters for the real parameter (the \TeX/ group is not open/close
+here).
 
 The example above shows a declaration of \ii unseparated/parameter,@ {\em unseparated parameters}. The
 parameters were declared by `#1` or `#1#2` with no text appended to such
@@ -822,7 +824,7 @@ paragraph. It processes the `<math text>` in a group and in
 \ii internal/math/mode,math/mode/internal {\em internal math mode}. 
 The `$`\c3`$`\c3`<math text>$`\c3`$`\c3 generates a separate line with math 
 formula(s). It processes the `<math text>` in a group and in 
-\ii display/math/mode,math/mode/display {\em dislay math mode}. 
+\ii display/math/mode,math/mode/display {\em display math mode}. 
 
 The fonts in math mode are selected in a very specific manner which is independent 
 of the current text font. Six different math objects are automatically detected
