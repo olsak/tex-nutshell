@@ -8,7 +8,7 @@
 \def\thed#1{\ifnum#1<10 0\fi\the#1}
 
 \catcode`<=13
-\def<#1>{{\def\ { }\iindex{:#1}\iis {:#1} {$\langle\hbox{\it#1}\rangle$}}%
+\def<#1>{{\def\_dsp { }\iindex{:#1}\iis {:#1} {$\langle\hbox{\it#1}\rangle$}}%
    $\def\,{\hskip1.5pt plus.3pt minus1.2pt}\,\langle\hbox{\it#1}\rangle\,$}
 \def\l#1>{$\def\,{\hskip1.5pt plus.3pt minus1.2pt}\,\langle\hbox{\it#1}\rangle\,$}
 \everyintt={\catcode`<=13 \Blue}
@@ -70,8 +70,8 @@ document that presents these basic principles because \LaTeX/ manuals
 typically don't distinguish between \TeX/ features and features specially
 implemented by \LaTeX/ macros. 
 
-I would like to express my special thank to Barbara Beeton who read my text
-very carefully and suggested hundreds language corrections and improvements
+I would like to express my special thanks to Barbara Beeton who read my text
+very carefully and suggested hundreds of language corrections and improvements
 and also discovered many of my real mistakes. Thanks to her, my text is
 better. But if there are any other mistakes then they are only mine and I'll be
 pleased if you send me a bug report in such case.  
@@ -195,19 +195,19 @@ They implement classical \TeX/ algorithms with various extensions:
 * \ii pdfTeX pdf\TeX/ -- an extension supporting PDF output directly and
              micro-typographical features,
 * \ii XeTeX \XeTeX/ -- an extension supporting Unicode and PDF output, 
-* \ii luaTeX lua\TeX/ -- an extension supporting Lua programming, Unicode,
+* \ii luaTeX Lua\TeX/ -- an extension supporting Lua programming, Unicode,
             micro-typographical features and PDF output.
 \enditems
 
 Each of them is able to run in ini-\TeX/ state or with a format file. For
-example the command `luatex -ini macros.ini` starts lua\TeX/ at ini-\TeX/ state,
+example the command `luatex -ini macros.ini` starts Lua\TeX/ at ini-\TeX/ state,
 reads the `macros.ini` file and the final `\dump` command is supposed here to create
 a format `macros.fmt`. Then a user can use the command `luatex -fmt macros document` to
 load `macros.fmt` and process the `document.tex`.
-Or the command `luatex document` processes lua\TeX/ with `document.tex` and 
+Or the command `luatex document` processes Lua\TeX/ with `document.tex` and 
 with `luatex.fmt` which is a little extension of plain \TeX/ macros. Another example:
-`lualatex document` runs lua\TeX/ with `lualatex.fmt`. It is a format with
-\LaTeX/ macros for lua\TeX/ engine. Final example: 
+`lualatex document` runs Lua\TeX/ with `lualatex.fmt`. It is a format with
+\LaTeX/ macros for Lua\TeX/ engine. Final example: 
 `optex document` runs Lua\TeX/ with `optex.fmt` which is
 a format with \ii OpTeX \ulink[http://petr.olsak.net/optex]{\OpTeX/ macros}.
 
@@ -296,7 +296,7 @@ If you need to print these special characters you can use
 \"print this character" in all typical \TeX/ formats.
 Another possibility is to use a verbatim environment (it depends on the used format) 
 Last alternative: you can use \i csstring {\let\,=\relax`\csstring\<character>`} 
-in lua\TeX/, because lua\TeX/ disposes
+in Lua\TeX/, because Lua\TeX/ disposes
 with the primitive command `\csstring` which converts `\<character>`
 to `<character>`\c{12}.
 
@@ -362,7 +362,7 @@ The tokenizer converts two `^`\c7`^`\c7 characters followed by an ASCII uppercas
 letter to the Ctrl-letter ASCII code. For example `^^M` is Ctrl-M (carriage
 return). It converts two `^`\c7`^`\c7 followed by two hexadecimal digits 
 (`0123456789abcdef`) to a one-byte code, for example, `^^0d` is Ctrl-M too 
-because it has code 13. Moreover, the tokenizer of \XeTeX/ or lua\TeX/ converts
+because it has code 13. Moreover, the tokenizer of \XeTeX/ or Lua\TeX/ converts
 `^`\c7`^`\c7`^`\c7`^`\c7 followed by four hexadecimal digits or 
 `^`\c7`^`\c7`^`\c7`^`\c7`^`\c7`^`\c7 followed by six hexadecimal digits to one
 character with a given Unicode.
@@ -929,9 +929,9 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
   It returns the code of the `<character>`. Examples:
   \code{`}`A` or one-character control sequence \code{`\\A}).
   Both examples represent the number 65. The Unicode of the character 
-  is taken here if lua\TeX/ or \XeTeX/ is used;
+  is taken here if Lua\TeX/ or \XeTeX/ is used;
 * \i numexpr `\numexpr<num. expression>`.\fnote
-  {This is a feature of the $\varepsilon$\TeX/ extension. It is implemented in pdf\TeX, \XeTeX/ and lua\TeX.}
+  {This is a feature of the $\varepsilon$\TeX/ extension. It is implemented in pdf\TeX, \XeTeX/ and Lua\TeX.}
   The `<num. expression>` uses operators `+`, `-`, `*` and \code{/} and
   brackets `(`, `)` in normal sense. The operands are `<number>`s. It
   is terminated by something incompatible with
@@ -1188,9 +1188,9 @@ detail).
 Notes about notation are in this and the following sections. 
 If the documented command is from the $\varepsilon$\TeX{} extension 
 (i.e.\ implemented in pdf\TeX, \XeTeX/
-and lua\TeX) then one * is prefixed. If it is from the pdf\TeX/ extension
-(implemented in \XeTeX/ and lua\TeX/ too) then two ** are prefixed. 
-If it is~a~lua\TeX/ only command then three *** are prefixed.
+and Lua\TeX) then one * is prefixed. If it is from the pdf\TeX/ extension
+(implemented in \XeTeX/ and Lua\TeX/ too) then two ** are prefixed. 
+If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \begitems
 * \i string `\string|<control sequence>;` expands to an \x`\escapechar` (if positive)
@@ -1206,9 +1206,9 @@ If it is~a~lua\TeX/ only command then three *** are prefixed.
   are tokens {\char9251}\c{10}, and all other tokens are set as \"other
   characters\c{12}".
 
-* \i the `\the|<register>;` expands to the value of the register. Examples appear in the
+* \i the `\the<register>` expands to the value of the register. Examples appear in the
   previous section. The output is tokenized like of `\detokenize`.
-  The exception is `\the|<tokens register>;`: the output is the value
+  The exception is `\the<tokens register>`: the output is the value
   of the `<tokens register>` without re-tokenizing and the expand processor 
   does not expand this output in `\edef`, `\write`, `\message`, etc., arguments.
 
@@ -1850,7 +1850,7 @@ If it is~a~lua\TeX/ only command then three *** are prefixed.
 \enditems
 
 \noindent {\bf Commands specific for PDF output} 
-(available in pdf\TeX, \XeTeX/ and lua\TeX)
+(available in pdf\TeX, \XeTeX/ and Lua\TeX)
 
 \begitems
 * \i pdfliteral \z`\pdfliteral{<text>}` puts the \z`<text>` interpreted 
@@ -1916,7 +1916,7 @@ If it is~a~lua\TeX/ only command then three *** are prefixed.
 \enditems
 
 \noindent {\bf Microtypographical extensions}
-(available in pdf\TeX/, lua\TeX/ and not all of them in \XeTeX)
+(available in pdf\TeX/, Lua\TeX/ and not all of them in \XeTeX)
 
 \begitems
 * \i pdffontexpand 
@@ -2186,7 +2186,7 @@ If it is~a~lua\TeX/ only command then three *** are prefixed.
 \iis plain~TeX/macros {plain \TeX/ macros}
 \iis OpTeX {\OpTeX}
 \iis pdfTeX {pdf\TeX}
-\iis luaTeX {lua\TeX}
+\iis luaTeX {Lua\TeX}
 \iis XeTeX {\XeTeX}
 \iis TeX/engines {\TeX/ engines}
 \iis -percent {{\code{\\\%}}}
