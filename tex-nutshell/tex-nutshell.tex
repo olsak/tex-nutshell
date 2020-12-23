@@ -449,7 +449,7 @@ alternatives), \i hrule `\hrule`, \i end `\end` and the plain \TeX/ macro \i bye
 Each assignment to registers, declaration macros or font selecting is local
 in groups. When the current group ends then the assignments made inside the
 group are forgotten and the values in effect before this group was opened are restored.
-The groups can be delimited by `{` and `}` pair or by \i begingroup `\begingroup` and 
+The groups can be delimited by `{`\c1 and `}`\c2 pair or by \i begingroup `\begingroup` and 
 \i endgroup `\endgroup` primitive commands or by 
 \i bgroup `\bgroup` and \i egroup `\egroup` control
 sequences declared by plain \TeX. 
@@ -788,7 +788,18 @@ then the number of `#` must be doubled for inner declaration. Example:
 \goodbye Eric John         % expands to: Eric says: good bye John.
 \endtt
 
-Note the `%` characters used in the `\defmacro` definition. They mask
+The exact implementation of the feature above: when \TeX/ reads macro body
+(during `\def`, `\edef`, `\gdef`, `\xdef`) then each double `#`\c6  is converted 
+to single `#`\c6 and each (unconverted yet) single `#`\c6 followed by a digit is
+converted to an internal mark of future parameter. This mark is replaced
+by real prameter when the defined macro is used. This rule of conversion of
+macro body has one exception: `\edef{...\the\toks...}` keeps the toks
+content unexpanded and without conversion of hashes. And there exists 
+a reverse conversion from internal marks to~`#`\c{12}<number> and 
+from `#`\c6 to `#`\c{12}`#`\c{12} 
+when \TeX/ writes macro body by \i meaning `\meaning` primitive.
+
+Note the `%` characters used in the `\defmacro` definition in the exmample above. They mask
 the end of lines. If you don't use them, then the space tokens are included here (generated
 by the tokenizer at the end of each line). The `<replacement text>` of `\defmacro` will be
 `<space>\def#1...{...}<space>` in such a case. Each usage of `\defmacro` 
