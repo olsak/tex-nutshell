@@ -1204,10 +1204,12 @@ and Lua\TeX) then one * is prefixed. If it is from the pdf\TeX/ extension
 If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \begitems
-* \i string `\string|<control sequence>;` expands to an \x`\escapechar` (if positive)
-  followed by the name of the control sequence. All characters of the output
-  are \"other characters\c{12}", only spaces (if any exist)
-  are kept as space tokens {\char9251}\c{10}.  
+* \i string `\string|<control sequence>;` expands to \"the \x`\escapechar`"
+  followed by the name of the control sequence. \i escapechar \"The \x`\escapechar`" means a
+  character with code equal to \x`\escapechar` or nothing if its value is
+  out of range of character codes.
+  All characters of the output are \"other characters\c{12}", only spaces (if any exist)
+  are kept as space tokens {\char9251}\c{10}. 
 
 * \*\*\*\i csstring `\csstring|<control sequence>;` works like`\string` but without
   `\escapechar`.
@@ -1985,6 +1987,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   a math `<formula>` and gives `<delimiter>`s around it with an appropriate size
   (compatible with the size of the formula). The `<delimiter>`s are typically
   brackets.
+* \*\i middle `\middle<delimiter>` can be used inside the <formula>
+  surronded by `\left`, `\right`. The given <delimiter> gets the same size
+  as delimiters declared by appropriate `\left`, `\right`.
 * Exponents and scripts are typically at the right side of the preceding
   math object. But if this object is a \"big operator" (summation, integral)
   then exponents and scripts are printed above and below this operator.
