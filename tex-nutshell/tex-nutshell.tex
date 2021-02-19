@@ -1355,6 +1355,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 * \*\i unexpanded `\unexpanded/<expandafters>.`\z`{|<text>};` returns \z`<text>` and applies 
   `\noexpand` to all tokens in the \z`<text>`. 
 
+* \*\*\i expanded `\expanded{<tokens>}` expands `<tokens>` and
+  reads these expanded `<tokens>` again.
+
 * \*\i numexpr `\numexpr<num. expression>`, \i dimexpr \*`\dimexpr<dimen expression>`.
   Documented in the `<dimen>` and `<number>` syntax rules in section~\ref[reg].
 
