@@ -1187,11 +1187,12 @@ detail).
   \y`\everyhbox={}`
   \y`\everyvbox={}`
   \y`\everycr={}`,
+  \*\y`\everyeof={}`,
   \y`\everyjob={}`.
   These token lists are processed when an algorithm of \TeX/ reaches a corresponding
   situations respectively: opens output routine, paragraph, internal math mode, display
-  math mode, \x`\vbox`, \x`\hbox`, is at the end of a line in a table, or
-  starts the job.  
+  math mode, \x`\vbox`, \x`\hbox`, is at the end of a line in a table,
+  at the end of an input file, or starts the job.
 \enditems
 
 \sec[expand] Expandable primitive commands
@@ -1636,7 +1637,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 * \x`\hskip`, \x`\vskip`. They insert a horizontal/vertical glue. Documented in
   section~\ref[boxes].
 * \x`\hfil`, \x`\hfill`, \x`\hss`, \x`\vfil`, \x`\vfill`, \x`\vss` are alternatives
-  of \x`\hskip`, \x`\vskip`. 
+  of \x`\hskip`, \x`\vskip`, see section~\ref[boxes].
+* \x`\hfilneg`, \x`\vfilneg` are shortcuts for `\hskip 0pt plus-1fil`
+  and `\vskip 0pt plus-1fil`.
 * \i kern `\kern<dimen>` puts unbreakable horizontal/vertical space 
   depending on the current mode.
 * \i penalty `\penalty<number>` puts the penalty `<number>` on the current
