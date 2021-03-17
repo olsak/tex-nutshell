@@ -928,7 +928,7 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
 
 \begitems \let\_aboveliskip=\relax 
 * The `<number>` could be 
-\begitems \style -
+\begitems \style N
 * a register of counter type;
 * a character constant declared by \x`\chardef` or \x`\mathchardef` primitive command. 
 * an integer decimal number (with optional `+` or `-` prefixed)
@@ -950,8 +950,9 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
   The `\relax` (if it is used as a separator) is removed.
   If the result is non-integer, then it is rounded (not truncated).
 \enditems
+  The rules 3)--6) can be terminated by one optional space.
 * The `<dimen>` could be
-\begitems \style -
+\begitems \style N
 * a register of dimen type or counter type;
 * a decimal number with an optional decimal point (and optional `+` or `-`
   prefixed) followed by `<dimen unit>`. The `<dimen unit>` is \ii pt `pt` (point)\fnote 
@@ -971,6 +972,7 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
   syntactic rule of `<dimen expression>` or by `\relax`. The `\relax` (if it
   is used as a separator) is removed.
 \enditems
+  The rule 2) can be terminated by one optional space.
 * The `<skip>` could be:
 \begitems \style -
 * a register of glue type or dimen type or counter type;
