@@ -1951,6 +1951,12 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   the given `<step>`.
   To activate this feature you must set the \x`\pdfadjustspacing`
   numeric register to a positive value. 
+* \i efcode `\efcode <font selector><char. code>=<number>`
+  sets the degree of willigness of given character to be deformed when
+  `\pdffontexpand` is used. Default value for all
+  characters is 1000 and `<number>`/1000 gives the proportion coefficient for
+  stretching or shrinking of the character with respect to the \"normal" deformation
+  of characters with default value 1000.
 * \i rpcode \i lpcode 
   `\rpcode <font selector><char. code>=<number>`,
   `\lpcode <font selector><char. code>=<number>` allows the declaration of
