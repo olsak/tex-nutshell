@@ -32,12 +32,13 @@
 \enquotes
 
 % to index macros:
-\def\i #1 {\makedest{#1}\ii .#1 \iis .#1 {{\code{\\#1}}}}
+\def\i #1 {\makedest{#1}\ii .#1 \iis .#1 {\ilink[cs:#1]{\code{\\#1}}}}
 \def\x`{\bgroup\_setverb\xx}
 \bgroup \lccode\string`\.=\string`\` \lowercase{\egroup \def\xx #1#2.{\i #2 \egroup `#1#2.}}
 \def\y`{\bgroup\_setverb\yy}
 \def\yy #1#2={\i #2 \egroup `#1#2=}
 \def\z`{`\let<=\l}
+\let\_cslinkcolor=\Blue
 
 % tex-nutshell.pdf includes destinations to the explanation of the primitive
 % control sequences and plain TeX macros in the form: "cs:sequence". For example,
@@ -60,7 +61,7 @@
    \fi
 }
 \def\noda{\def\makedest##1{}}
-
+\def\doda{\let\makedest\makedestactive}
 
 % Hyperlinks
 \hyperlinks\Red\Green
@@ -121,7 +122,7 @@ There are four types of meanings of control sequences:
   behavior of built-in algorithms (e.g., \i hsize `\hsize`, \i parindent `\parindent`,
   \i hyphenpenalty `\hyphenpenalty`). On the other hand \ii declared/register {\em declared registers} 
   are used by macros (e.g., \i medskipamount `\medskipamount` used in plain \TeX/ 
-  or \i ttindent `\ttindent` 
+  or {\doda\i ttindent `\ttindent`}
   used by \ii OpTeX \OpTeX/).
 * the control sequence can be a \ii primitive/command {\em primitive command}, which runs a built-in
   algorithm (e.g., \i def `\def` declares a macro, \i halign `\halign` runs the algorithm for
@@ -142,7 +143,7 @@ Example. When \TeX/ reads:
 \def\TeX{T\kern-.1667em\lower.5ex\hbox{E}\kern-.125emX}
 \endtt
 in a macro file, then the `\def` primitive command saves the information that
-\i TeX `\TeX` is a control sequence with meaning \"macro", the replacement text is
+{\doda\i TeX `\TeX`} is a control sequence with meaning \"macro", the replacement text is
 declared here, and it is a mix of a material to be typeset: `T`, `E` and `X` 
 and primitive commands 
 \i kern `\kern`, \i lower `\lower`, \i hbox `\hbox` 
@@ -476,8 +477,8 @@ The groups can be delimited by `{`\c1 and `}`\c2 pair or by \i begingroup `\begi
 \i endgroup `\endgroup` primitive commands or by 
 \i bgroup `\bgroup` and \i egroup `\egroup` control
 sequences declared by plain \TeX. 
-For example, plain \TeX/ declares the macros \i rm `\rm` (selects roman font),
-\i bf `\bf` (selects bold font) and \i it `\it` (selects italics) and it initializes by
+For example, plain \TeX/ declares the macros {\doda\i rm `\rm` (selects roman font),
+\i bf `\bf` (selects bold font) and \i it `\it`} (selects italics) and it initializes by
 \i rm `\rm` font. A user can write:
 
 \begtt
@@ -882,7 +883,7 @@ syntax for `<math text>`. So, \LaTeX/ manuals or \LaTeX/ documents
 serve a good source if you want to get to know the rules of math typesetting
 by \TeX. There is only one significant difference. Fractions are constructed at
 the primitive level by the \x`\over` primitive:
-`{<numerator>\over<denominator>}` but \LaTeX/ uses a macro \x`\frac` in the
+`{<numerator>\over<denominator>}` but \LaTeX/ uses a macro {\doda\x`\frac`} in the
 syntax `\frac{<numerator>}{<denominator>}`. Plain \TeX/ users (including the
 author of \TeX/) prefer the syntax which follows the
 principle \"how a human reads the formula". On the other hand, the 
@@ -2235,7 +2236,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \vfil\break
 
-\nonum\sec Index
+\nonum\sec[index] Index
 
 \iis LaTeX/macros {\LaTeX/ macros}
 \iis plain~TeX/macros {plain \TeX/ macros}
