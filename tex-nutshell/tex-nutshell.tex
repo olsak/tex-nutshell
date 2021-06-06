@@ -1377,6 +1377,10 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   (or nothing if no `<else text>` is declared) when a branch with a given
   `<number>` does not exist.
 
+* \*\i pdfstrcmp `\pdfstrcmp{<stringA>}{<stringB>}` returns $-1$ if
+  <stringA>$\string<$<stringB>, 0 if they are equal or 1 in other cases.
+  It is not implemented in \LuaTeX.
+
 * \i noexpand `\noexpand|<token>;`. 
    The expand processor does not expand the `<token>` if it is expanding the
    text in {\noda\x`\edef`, \x`\write`, \x`\message`} or similar lists.
@@ -1497,6 +1501,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   processor. Typically \z`<token 1>` is a macro that needs to know the next token.
 \enditems
 
+\goodbreak
 \noindent {\bf Commands for box manipulation}
 
 \begitems
@@ -2268,7 +2273,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \noindent
 Petr Olšák {\tt petr@olsak.net}\nl
 Czech Technical University in Prague\nl
-Version of the text: 0.7 (\the\year-\thed\month-\thed\day)
+Version of the text: 0.7+ (\the\year-\thed\month-\thed\day)
 
 \break
 
