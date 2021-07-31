@@ -1,7 +1,7 @@
 \useoptex % We are using OpTeX, no LaTeX
 
-\report
 \fontfam[pagella]
+\report
 
 \emergencystretch=2em
 \hbadness=2100
@@ -134,8 +134,8 @@ There are four types of meanings of control sequences:
 * the control sequence can be a \ii macro {\em macro}. When it is read, it is
   replaced by its \ii replacement/text {\em replacement text} in the input queue. If there are more
   macros in the replacement text, all macros are replaced. This is called the 
-  \ii expansion/process {\em expansion process} which ends on the level of text to be printed or 
-  primitive commands or registers or character constants or font selectors.
+  \ii expansion/process {\em expansion process} which ends when only printable tex, primitive commands,
+  registers, character constants, or font selectors remain.
 \enditems
 
 Example. When \TeX/ reads:
@@ -170,7 +170,7 @@ only \"private" control sequences (prefixed by `_`). So, a user can re-define
 \sec Formats, engines
 
 \TeX/ is able to start without any macros preloaded in the so-called \ii ini-TeX/state {\em ini-\TeX/
-state} (the `-ini` option on the command line must be used). It knows only Cca 300
+state} (the `-ini` option on the command line must be used). It knows only about 300
 primitive registers and primitive commands at this state.\fnote
 {Roughly speaking, if you know all these 300 primitive objects and the syntax of all
 primitive commands and all the built-in algorithms, then you know all about \TeX.
@@ -318,10 +318,10 @@ If you need to print these special characters you can use
 \ii -percent,-at,-dollar,-hash
 `\%`, `\&`, `\$`, `\#` or `\_`. These five control sequences are declared as
 \"print this character" in all typical \TeX/ formats.
-Another possibility is to use a verbatim environment (it depends on the used format) 
+Another possibility is to use a verbatim environment (it depends on the used format).
 Last alternative: you can use \i csstring {\let\,=\relax`\csstring\<character>`} 
-in Lua\TeX/, because Lua\TeX/ disposes
-with the primitive command `\csstring` which converts `\<character>`
+in Lua\TeX/, because Lua\TeX/ contains
+the primitive command `\csstring` which converts `\<character>`
 to `<character>`\c{12}.
 
 The \ii active/character \"active character\c{13}"
@@ -330,7 +330,7 @@ Such a `<character>` behaves like a `<control sequence>`. For example, you can
 define it by
 \i def `\def<character>{...}`.
 If a `<control sequence>` is
-listed in this document, the active character is meant too.
+listed in this document, then it is also defined as active character.
 {\emergencystretch=2em\par}
 
 Each control sequence is built by the tokenizer starting from `\`\c0. Its name is
@@ -458,8 +458,9 @@ The following primitive commands used in vertical mode start
 horizontal mode: the first character of a paragraph (most common
 situation) or \i indent `\indent`, \i noindent `\noindent`, \i hskip `\hskip` 
 (and its alternatives),
-\i vrule `\vrule`\fnote {The list is not fully completed, but most important commands
-are mentioned here.} and the plain \TeX/ macro \i leavevmode `\leavevmode`.
+\i vrule `\vrule` and the plain \TeX/ macro 
+\i leavevmode `\leavevmode`\fnote {The list is not fully completed, but most important commands
+are mentioned here.}.
 When horizontal mode is opened, an indentation of \i parindent `\parindent` width 
 is included. The exception is only if horizontal mode is started by
 \i noindent `\noindent`; then the paragraph has no indentation.
@@ -748,7 +749,7 @@ example:
 Note that there are two possibilities of how to write real macro
 parameters when a macro is in use. The parameter is one token by default but
 if there is `{<something>}` then the parameter is `<something>`. The braces
-here are delimiters for the real parameter (the \TeX/ group is not open/close
+here are delimiters for the real parameter (no \TeX/ group is opened/closed
 here).
 
 The example above shows a declaration of \ii unseparated/parameter,@ {\em unseparated parameters}. The
@@ -1077,7 +1078,7 @@ value given by plain \TeX/ follows.
   by \x`\baselineskip` by default. The appropriate real glue is inserted
   between the lines.
   But if this real glue (between boxes) is less than \x`\lineskiplimit` 
-  then only \x`\lineskip` is inserted between the boxes.
+  then \x`\lineskip` is inserted between the boxes instead.
 
 * \y`\topskip=10pt` is the distance between the top of the page box and the baseline of
   the first line.
@@ -1299,7 +1300,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   We need not define `\csname` by `\def`; we want to define 
   a `\dict:key`. The \x`\expandafter` helps here.
 
-  The \z`<token 2>` should be another \x`\expandafter`. We can see
+  The \z`<token 2>` can be another \x`\expandafter`. We can see
   \x`\expandafter` chains in many macro files. For example
   `\expandafter A\expandafter B\expandafter CD` is processed as
   \z`ABC<expanded D>`.  
