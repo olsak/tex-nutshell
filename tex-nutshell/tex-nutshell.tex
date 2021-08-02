@@ -329,8 +329,9 @@ can be declared by \i catcode `\catcode`\code{`}`\<character>=13`.
 Such a `<character>` behaves like a `<control sequence>`. For example, you can
 define it by
 \i def `\def<character>{...}`.
-If a `<control sequence>` is
-listed in this document, then it is also defined as active character.
+If the name of a `<control sequence>`
+listed in this document contains only one character,
+then this character is also defined as an active character.
 {\emergencystretch=2em\par}
 
 Each control sequence is built by the tokenizer starting from `\`\c0. Its name is
