@@ -134,7 +134,7 @@ There are four types of meanings of control sequences:
 * the control sequence can be a \ii macro {\em macro}. When it is read, it is
   replaced by its \ii replacement/text {\em replacement text} in the input queue. If there are more
   macros in the replacement text, all macros are replaced. This is called the 
-  \ii expansion/process {\em expansion process} which ends when only printable tex, primitive commands,
+  \ii expansion/process {\em expansion process} which ends when only printable text, primitive commands,
   registers, character constants, or font selectors remain.
 \enditems
 
@@ -320,7 +320,7 @@ If you need to print these special characters you can use
 \"print this character" in all typical \TeX/ formats.
 Another possibility is to use a verbatim environment (it depends on the used format).
 Last alternative: you can use \i csstring {\let\,=\relax`\csstring\<character>`} 
-in Lua\TeX/, because Lua\TeX/ contains
+in Lua\TeX/, because it has
 the primitive command `\csstring` which converts `\<character>`
 to `<character>`\c{12}.
 
@@ -459,8 +459,8 @@ horizontal mode: the first character of a paragraph (most common
 situation) or \i indent `\indent`, \i noindent `\noindent`, \i hskip `\hskip` 
 (and its alternatives),
 \i vrule `\vrule` and the plain \TeX/ macro 
-\i leavevmode `\leavevmode`\fnote {The list is not fully completed, but most important commands
-are mentioned here.}.
+\i leavevmode `\leavevmode`\fnote {The list is not exhaustive, but most important commands
+are mentioned.}.
 When horizontal mode is opened, an indentation of \i parindent `\parindent` width 
 is included. The exception is only if horizontal mode is started by
 \i noindent `\noindent`; then the paragraph has no indentation.
