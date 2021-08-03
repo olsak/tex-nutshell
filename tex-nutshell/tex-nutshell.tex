@@ -134,8 +134,9 @@ There are four types of meanings of control sequences:
 * the control sequence can be a \ii macro {\em macro}. When it is read, it is
   replaced by its \ii replacement/text {\em replacement text} in the input queue. If there are more
   macros in the replacement text, all macros are replaced. This is called the 
-  \ii expansion/process {\em expansion process} which ends when only printable text, primitive commands,
-  registers, character constants, or font selectors remain.
+  \ii expansion/process {\em expansion process} which ends when only printable text,
+  primitive commands (listed in section~\ref[main]), 
+  registers (section~\ref[reg]), character constants, or font selectors remain.
 \enditems
 
 Example. When \TeX/ reads:
@@ -170,9 +171,10 @@ only \"private" control sequences (prefixed by `_`). So, a user can re-define
 \sec Formats, engines
 
 \TeX/ is able to start without any macros preloaded in the so-called \ii ini-TeX/state {\em ini-\TeX/
-state} (the `-ini` option on the command line must be used). It already knows more than 700
-primitive registers and primitive commands at this state.\fnote
-{Roughly speaking, if you know all these primitive objects and the syntax of all
+state} (the `-ini` option on the command line must be used). It already knows
+only primitive registers and primitive commands at this state.\fnote
+{Roughly speaking, if you know all these primitive objects (about 300 in
+classical \TeX/, 700 in Lua\TeX/) and the syntax of all these
 primitive commands and all the built-in algorithms, then you know all about \TeX.
 But starting to produce ordinary documents from this primitive level without
 macro support is nearly impossible.}
@@ -326,13 +328,11 @@ to `<character>`\c{12}.
 
 The \ii active/character \"active character\c{13}"
 can be declared by \i catcode `\catcode`\code{`}`\<character>=13`. 
-Such a `<character>` behaves like a `<control sequence>`. For example, you can
+Such a `<character>` behaves like a control sequence. For example, you can
 define it by
-\i def `\def<character>{...}`.
-If the name of a `<control sequence>`
-listed in this document contains only one character,
-then this character is also defined as an active character.
-{\emergencystretch=2em\par}
+\i def `\def<character>{...}` and use this `<character>` as a macro. 
+If the term `<control sequence>` is used in syntactical rules in this document
+then it means a real control sequence or an active character.
 
 Each control sequence is built by the tokenizer starting from `\`\c0. Its name is
 a continuous sequence of letters\c{11} finalized by the first non-letter. 
@@ -1227,6 +1227,9 @@ detail).
 
 \sec[expand] Expandable primitive commands
 
+These commands are processed like macros, i.e.\ they expand to
+another sequence of tokens. 
+
 Notes about notation are in this and the following sections. 
 If the documented command is from the $\varepsilon$\TeX{} extension 
 (i.e.\ implemented in pdf\TeX, \XeTeX/
@@ -1303,8 +1306,8 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
   The \z`<token 2>` can be another \x`\expandafter`. We can see
   \x`\expandafter` chains in many macro files. For example
-  `\expandafter A\expandafter B\expandafter CD` is processed as
-  \z`ABC<expanded D>`.  
+  `\expandafter\A\expandafter\B\expandafter\C\D` is processed as
+  \z`\A \B \C <expanded>\D`.  
 
   The `/<expandafters>.`\z`{|<text>};` syntax rule enables us to prepare \z`|<text>;` by
   `\expandafter`(s). For example \i detokenize `\detokenize{\macro}` expands to
