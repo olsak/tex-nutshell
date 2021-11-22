@@ -808,8 +808,8 @@ then the number of `#` must be doubled for inner declaration. Example:
 \def\defmacro#1#2{%
    \def#1##1 ##2 {##1 says: #1 ##2.}%
 }
-\defmacro \hello  {hello}  % expands to \def\hello#1 #2 {#1 says: hello #2.}
-\defmacro \goobye {good bye}
+\defmacro \hello   {hello} % expands to \def\hello#1 #2 {#1 says: hello #2.}
+\defmacro \goodbye {good bye}
 \hello   Jane Eric         % expands to: Jane says: hello Eric.
 \goodbye Eric John         % expands to: Eric says: good bye John.
 \endtt
@@ -1282,7 +1282,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   Another example: a macro programmer should implement a key/value dictionary 
   using this primitive: 
 \begtt
-\def\keyval #1 #2 {\expandafter\def\csname dict:#1\endcsnme{#2}}
+\def\keyval #1 #2 {\expandafter\def\csname dict:#1\endcsname{#2}}
 \def\value #1 {\csname dict:#1\endcsname} 
 \keyval Peter 21 % key=Peter, value=21, saved to the dictionary
                  % it does \def\dict:Peter{21}
