@@ -202,7 +202,7 @@ format file with the same name which is used for running \TeX. For example
 and reads the `document.tex`. 
 
 The `tex.fmt` is the format file dumped when \ii plain~TeX/macros {\em plain \TeX/ macros}\fnote
-{Plain \TeX/ macros were made by \iindex {Knuth,/Donald} Donald Knuth, the author of \TeX. It is a
+{Plain \TeX/ macros were made by \iindex {Knuth,/Donald}Donald Knuth, the author of \TeX. It is a
 set of basic macros and settings which is used (more or less) as a subset of
 all other macro packages.} 
 were read, and `latex.fmt` is the format file dumped when \ii LaTeX/macros {\em \LaTeX/ macros} were read.
@@ -342,7 +342,7 @@ Note that \OpTeX/ sets
 You can look to such files and you will see many such characters inside
 private control sequence names declared by \LaTeX/ macros.
 
-If the first character after `\`\c0 is not letter\c{\ne11}, then the control sequence is
+If the first character after `\`\c0 is non-letter (i.e.\ `<something>`\c{\ne11}), then the control sequence is
 finalized with only this character in its name. So called 
 \ii one~character/control~sequence {\em one-character control sequence} is created. Other control sequences 
 are \ii multiletter/control~sequence {\em multiletter control sequences}.
@@ -1103,7 +1103,8 @@ value given by plain \TeX/ follows.
   and \x`\widowpenalty` (inserted before the last line of a paragraph). Typographical rules
   often demand us to set these registers to 10000 (no page break is allowed here).
 
-* \y`\looseness=0` allows us to create of a \"suboptimal" paragraph. The page-building
+* \y`\looseness=0` allows us to create of a \"suboptimal" paragraph. The
+  paragraph building
   algorithm tries to build the paragraph with \x`\looseness` lines more than
   the optimal solution. If the {\noda\x`\tolerance`} does not have a sufficiently large value
   then this setting is simply ignored. It is reset to zero after each
@@ -1438,7 +1439,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 {\bf Commands used for declaration of control sequences}
 \par\nobreak\medskip\nobreak
 \begitems
-* \x`\def` \x`\edef` \x`\gdef` \x`\xdef` were documented in section~\ref[def].
+* \x`\def`, \x`\edef`, \x`\gdef`, \x`\xdef` were documented in section~\ref[def].
 
 * \x`\long` is a prefix; it can be used before `\def`, `\edef`, `\gdef`, `\xdef`.
   The declared macro accepts the control sequence `\par` in its parameters.
@@ -2248,13 +2249,13 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \nonum\sec[index] Index
 
-\iis LaTeX/macros {\LaTeX/ macros}
-\iis plain~TeX/macros {plain \TeX/ macros}
+\iis LaTeX/macros {\LaTeX{} macros}
+\iis plain~TeX/macros {plain \TeX{} macros}
 \iis OpTeX {\OpTeX}
 \iis pdfTeX {pdf\TeX}
 \iis luaTeX {Lua\TeX}
 \iis XeTeX {\XeTeX}
-\iis TeX/engines {\TeX/ engines}
+\iis TeX/engines {\TeX{} engines}
 \iis -percent {{\code{\\\%}}}
 \iis -at {{\code{\\\&}}}
 \iis -dollar {{\code{\\\$}}}
@@ -2262,12 +2263,13 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \iis -space {{\code{\\}{\tt\char9251}}}
 \iis -italiccorr {{\code{\\/}}}
 \iis -hyphen {{\code{\\-}}}
-\iis TeXlive {\TeX/live}
+\iis TeXlive {\TeX{}live}
 \iis baselineskiprule {\code{\\baselineskip} rule}
 \iis -comma {{\code{\\,}}}
 \iis -greater {{\code{\\>}}}
 \iis -column {{\code{\\;}}}
 \iis -exclam {{\code{\\!}}}
+\iis plain~TeX {plain \TeX}
 
 {\let\Blue=\relax \typosize[9/11] \begmulti 3 \makeindex \endmulti}
 
