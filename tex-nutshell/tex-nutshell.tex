@@ -21,7 +21,11 @@
 \adef|#1;{{\Red#1}}
 \toksapp\everyintt{\catcode`\/=13 \catcode`\|=13}
 \catcode`\/=12 \catcode`\|=12
-\def\comment#1\par{{\adef\%{\%}\Green\%#1}\par}
+\ifx\_partokenset\undefined
+   \def\comment#1\par{{\adef\%{\%}\Green\%#1}\par}
+\else
+   \def\comment#1\_par{{\adef\%{\%}\Green\%#1}\_par}
+\fi
 \catcode`\%=14
 \toksapp\everytt{\adef\%{\comment}}
 
