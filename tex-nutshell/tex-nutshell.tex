@@ -7,6 +7,19 @@
 \hbadness=2100
 \def\thed#1{\ifnum#1<10 0\fi\the#1}
 
+\let\isAleBsaved=\_isAleB
+\def\preprocessindex{%  sort \_iilist with the rule:  .word is before :word is before word
+   \def\_isAleB ##1##2{%
+      \edef\tmpb{\csstring ##1&\relax\csstring ##2&\relax}%
+      \_ea\testAleB \tmpb
+   }
+   \_dosorting\_iilist
+   \let\_isAleB=\isAleBsaved
+}
+\def\testAleB #1#2#3\relax #4#5#6\relax{%
+   \ifnum `#2<`#5 \_AleBtrue \else \_AleBfalse \fi
+}
+
 \catcode`<=13
 \def<#1>{{\def\_dsp { }\iindex{:#1}\iis {:#1} {$\langle\hbox{\it#1}\rangle$}}%
    $\def\,{\hskip1.5pt plus.3pt minus1.2pt}\,\langle\hbox{\it#1}\rangle\,$}
@@ -2275,7 +2288,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \iis -exclam {{\code{\\!}}}
 \iis plain~TeX {plain \TeX}
 
-{\let\Blue=\relax \typosize[9/11] \begmulti 3 \makeindex \endmulti}
+{\let\Blue=\relax \typosize[9/11] \preprocessindex \begmulti 3 \makeindex \endmulti }
 
 \normalbottom
 
