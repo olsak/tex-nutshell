@@ -1773,6 +1773,14 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   number type then the result is truncated.
 * See \*`\numexpr` and \*`\dimexpr`, expandable primitives documented in
   sections~\ref[reg] and~\ref[expand].
+* \*\*\i pdfuniformdeviate `\pdfuniformdeviate<number>` expands to a random
+  number uniformly distributed in the range 0 (inclusive) to
+  `<number>` (exclusive). Normal distribution between $-65536$ and $65536$
+  can be reached by \*\*\i pdfnormaldeviate `\pdfnormaldeviate`.
+  The generator is initialized by time of the compilation, or you can use
+  \*\*\i pdfsetrandomseed `\pdfsetrandomseed<number>` to do fixed
+  initialization, `<number>` is an integer less than 1,000,999,999.
+  Luatex supports the same primitives but without `\pdf` prefix.
 \enditems
 
 \noindent {\bf Internal codes}
@@ -2038,7 +2046,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   This feature is supported by pdf\TeX/ only.
 \enditems
 
-\noindent {\bf Commands used in math mode}
+\goodbreak\noindent {\bf Commands used in math mode}
 
 \begitems
 * \x`\displaystyle`, \x`\textstyle`, \x`\scriptstyle`, \x`\scriptscriptstyle`
@@ -2262,7 +2270,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \raggedbottom
 
-\vfil\break
+%\vfil\break
 
 \nonum\sec[index] Index
 
@@ -2297,7 +2305,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \noindent
 Petr Olšák {\tt petr@olsak.net}\nl
 Czech Technical University in Prague\nl
-Version of the text: 0.7+ (\the\year-\thed\month-\thed\day)
+Version of the text: 0.8+ (\the\year-\thed\month-\thed\day)
 
 \break
 
