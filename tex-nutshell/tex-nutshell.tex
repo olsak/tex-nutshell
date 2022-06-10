@@ -801,6 +801,9 @@ The rule \"everything must be balanced" is applied to separated parameters
 too. It means that `\Test AB{C..DEF G}.. H` from the example above reads
 `B{C..DEF G}` to the `#2` parameter and the `#3` parameter is empty 
 because the space (the delimiter of `#3` parameter) immediately follows two dots.
+If the real parameter is in the form `{...}` then the outer
+braces are removed from the parameter. For example `\Test A{C..DEF G}.. H`
+reads `C..DEF G` to the `#2`.
 
 The separated parameter can bring a potential problem if the user forgets the
 delimiter or the delimiter is specified incorrectly. Then \TeX/ reports an
@@ -823,7 +826,7 @@ then the number of `#` must be doubled for inner declaration. Example:
 
 \begtt
 \def\defmacro#1#2{%
-   \def#1##1 ##2 {##1 says: #1 ##2.}%
+   \def#1##1 ##2 {##1 says: #2 ##2.}%
 }
 \defmacro \hello   {hello} % expands to \def\hello#1 #2 {#1 says: hello #2.}
 \defmacro \goodbye {good bye}
