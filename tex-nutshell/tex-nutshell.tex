@@ -2053,7 +2053,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \begitems
 * \x`\displaystyle`, \x`\textstyle`, \x`\scriptstyle`, \x`\scriptscriptstyle`
-  switch to the specified style.
+  are `<style primitive>`\kern-2pts. They switch to the specified style.
+  \i mathchoice `\mathchoice{<D>}{<T>}{<S>}{<SS>}` prints only one its
+  agrument dependent on the current math style.
 * \x`\mathord`, \x`\mathop`, \x`\mathbin`, \x`\mathrel`, \x`\mathopen`, \x`\mathclose`,
   \x`\mathpunct` followed by `{<math list>}` create a math object of the given type.
 * \i over `{<numerator>\over<denominator>}` creates a fraction.
@@ -2201,6 +2203,14 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 * \x`\raggedright` sets the paragraph shape with the ragged right margin.
   \x`\raggedbottom` sets the page-setting shape with the ragged bottoms.
+
+* \i phantom `\phantom{<text>}` prints empty box with dimensions like
+  `\hbox{<text>}`. \i vphantom `\vphantom{<text>}`, \i hphantom
+  `\hphantom{<text>}` does the same but the result of `\vphantom` sets its
+  width to zero, the result of `\hphantom` sets its height plus depth to zero.
+  \i smash `\smash{<text>}` prints `\hbox{<text>}` but height plus depth is
+  set to zero. In math mode, these commands keep the current math style.
+
 \enditems
 
 \noindent{\bf Floating objects}
@@ -2269,6 +2279,10 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   \x`\leqalignno` does the same as `\eqalignno` but `<mark>` is put to the
   left margin.  
 }
+* \i mathpalette `\mathpalette\macro{<text>}` runs
+  `\macro<style primitive>{<text>}`. Your `\macro` can re-set current math
+  style using its `#1` parameter. Example: `\def\macro#1#2{\hbox{$#1#2$}}`.
+
 \enditems
 
 \raggedbottom
