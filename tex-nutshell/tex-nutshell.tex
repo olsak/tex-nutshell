@@ -19,7 +19,6 @@
 \def\testAleB #1#2#3\relax #4#5#6\relax{%
    \ifnum `#2<`#5 \_AleBtrue \else \_AleBfalse \fi
 }
-
 \catcode`<=13
 \def<#1>{{\def\_dsp { }\iindex{:#1}\iis {:#1} {$\langle\hbox{\it#1}\rangle$}}%
    $\def\,{\hskip1.5pt plus.3pt minus1.2pt}\,\langle\hbox{\it#1}\rangle\,$}
@@ -1231,6 +1230,12 @@ detail).
   These spaces are inserted above and below a formula generated in math display
   mode.
 
+* \y`\thinmuskip=3mu`,
+  \y`\medmuskip=4mu plus 2mu minus 4mu`, 
+  \y`\thickmuskip=5mu plus 5mu`.
+  These spaces are inserted after comma, around binary operators, and around
+  relations in math mode. The special math unit {\tt 1mu} is $(1/18)${\tt em}.
+  
 * \y`\tabskip=0pt` is used by the `\halign` primitive command for creating tables.
 
 * \y`\output={\plainoutput}`, \y`\everypar={}`, \y`\everymath={}`
@@ -1311,17 +1316,21 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \endtt
 
 * \i expandafter \z`\expandafter|<token 1><token 2>;` does the transformation
-  \z`<token 1><expanded token2>`. The token processor will expand \z`<token 1>`
-  after such a transformation. The \z`<expanded token2>` is only the first level of
+  \z`<token 1><expanded token 2>`. Then \TeX/ processes `<token 1>` followed by
+  `<expanded token 2>`. 
+  If `<token 2>` isn't expandable then `\expandafter` silently does nothing.
+  The \z`<expanded token2>` is only the first level of
   expansion. For example, a macro is transformed to its `<replacement text>`
   but without expansion of `<replacement text>` at this time.
   Or the `\csname...\endcsname` pair creates a control sequence but does not
   expand it at this time.
 
-  If \z`<token 2>` is not expandable then \x`\expandafter` silently does
-  nothing.
+%  If \z`<token 2>` is not expandable then \x`\expandafter` silently does
+%  nothing.
 
-  The example above (the `\keyval` macro) shows the usage of \x`\expandafter`.
+  A typical usage: the `<token 1>` is a macro or a \TeX/
+  primitive which needs `<expanded token 2>` as its parameter.
+  The example above (the `\keyval` macro) shows this case.
   We need not define `\csname` by `\def`; we want to define 
   a `\dict:key`. The \x`\expandafter` helps here.
 
@@ -2214,7 +2223,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \enditems
 
 \noindent{\bf Floating objects}
-
+\par\nobreak\medskip\nobreak
 \begitems
 * \i footnote `\footnote{<mark>}`\z`{<text>}` creates a footnote with given
   `<mark>` and \z`<text>`.
@@ -2287,7 +2296,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \raggedbottom
 
-%\vfil\break
+\vfil\break
 
 \nonum\sec[index] Index
 
