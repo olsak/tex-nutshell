@@ -421,7 +421,8 @@ command working only in horizontal mode or a character itself ---
 then the main processor switches to \ii horizontal/mode,@ {\em horizontal mode}: it opens 
 an unlimited horizontal data row for
 typesetting material and puts material next to each other. For example
-\i hbox `\hbox{a}\hbox{b}\hbox{c}` creates abc in horizontal mode.
+\i hbox `a\hbox{b}\hbox{c}` opens horizontal mode due to \"a character
+itself" `a` and creates abc in horizontal mode.
 
 When an empty line is scanned, the tokenizer creates a \i par `\par` token here and
 if the main processor is in horizontal mode, the `\par` command finalizes the
