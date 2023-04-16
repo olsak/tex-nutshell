@@ -898,7 +898,8 @@ All typographical traditions of math typesetting were taken into account.
 There are three chapters about math typesetting in his \TeX/book. Moreover,
 there is the detailed appendix G containing the exact specification of generating math
 formulae. This topic is unfortunately out of the scope of this short
-text.
+text. More about it can be found in
+\ulink[http://petr.olsak.net/ftp/olsak/optex/optex-math.pdf]{Typesetting Math with \OpTeX/}
 
 There is a good a piece of news: all formats (including \LaTeX/) take the default \TeX/
 syntax for `<math text>`. So, \LaTeX/ manuals or \LaTeX/ documents
@@ -1492,7 +1493,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   {\em do something} and it gets a \x`\chardef`-ed control sequence, it prints
   the character with Unicode (ASCII code) `<number>` to the typesetting output. 
   If it gets a \x`\mathchardef`-ed control sequence, it prints a math object (it works
-  only in math mode, not documented here).
+  only in math mode).
 
 * \i countdef `\countdef|<control sequence>;=<number>` declares `<control sequence>` as
   an equivalent to the `\count<number>` which is a register of counter type. 
@@ -2067,7 +2068,8 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   \i mathchoice `\mathchoice{<D>}{<T>}{<S>}{<SS>}` prints only one its
   agrument dependent on the current math style.
 * \x`\mathord`, \x`\mathop`, \x`\mathbin`, \x`\mathrel`, \x`\mathopen`, \x`\mathclose`,
-  \x`\mathpunct` followed by `{<math list>}` create a math object of the given type.
+  \x`\mathpunct` followed by `{<math list>}` create a math object of the given
+  class.
 * \i over `{<numerator>\over<denominator>}` creates a fraction.
   The primitive commands \x`\atop` (without fraction rule), 
   \i above `\above<dimen>` (fraction rule with given thickness) should be used in the same
@@ -2092,6 +2094,102 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   \i leqno `$$<formula>\leqno<mark>$$` puts it to the left margin.
 \enditems
 
+\noindent {\bf Commands for setting math codes and math-family fonts}\par\nobreak\medskip
+
+Each character used in math mode must have its {\em math-code}. It includes
+{\em class} of the character and how the glyph of the character should be printed.
+The class is one of this: 0=Ord, 1=Op, 2=Bin, 3=Rel, 4=Open, 5=Close, 6=Punct,
+and it affects spacing between objects, super/sub/script behavior etc.
+The glyph for printing the character is saved in a {\em math-family font} at
+its {\em slot}. Each math-family font has an assigned number using
+`\textfont`, `\scriptfont` and `\scriptscriptfont` primitives.
+When old 7bit \TeX/ fonts are
+used, then the whole set of math characters is divided to more math-family
+fonts, each of them has its own number. When Unicode math is used
+then all math characters are stored in a single font and we (almost) never
+need to use more than single math-family font with a single number.
+The format must specify the math-code (i.e. class, math-family font number
+and slot) for all characters used in math mode by following primitives.
+
+The `<math-code>` mentioned below is a single 15bit number mostly used in hexadecimal
+form with four digits: `"<d1><d2><d3><d4>`, where `<d1>` is the class, `<d2>` is
+the math-family font number and `<d3><d4>` is the slot.
+
+\begitems
+* \i mathcode `\mathcode <num>=<math-code>` sets the math-code for the character given
+  by its <num> ASCII code. The `<num>` is 8bit number.
+* \i mathchardef `\mathchardef <sequence>=<math-code>` declares math-code for
+  given `<sequence>`. When the `<sequence>` is used in math mode then it behaves
+  as a single object equal to a real single character with its `<math-code>`.
+* \i textfont `\textfont<num>=<font>` declares math-family font `<num>` as
+  `<font>` for normal size characters. The `<font>` is a font selector given
+  previously by `\font` primitive.
+* \i scriptfont `\scriptfont<num>=<font>` declares math-family font `<num>` as
+  `<font>` for script size.
+* \i scriptscriptfont `\scriptscriptfont<num>=<font>` declares math-family font `<num>` as
+  `<font>` for script-in-script size.
+\enditems
+
+Unicode values can be set in \XeTeX/ and \LuaTeX/:
+
+\begitems
+* \*\*\*\i Umathcode `\Umathcode<num>=<class><math-family><slot>` sets
+  the math-code for a character given by its Unicode <num>. The math-code is
+  presented by three independent numbers.
+* \*\*\*\i Umathchardef `\Umathchardef<sequence>=<class><math-family><slot>`
+  declares `<sequence>` as a math object with the given math-code.
+\enditems
+
+The scalable parentheses used after `\left`, `\right`, `\middle` must have
+its delimiter-code `<del-code>`. It is a
+24bit number. When the hexadecimal form `"<d1><d2><d3><d4><d5><d6>` of this
+number is used then it gives
+math-family font number `<d1>` and slot `<d2><d3>` for basic size (typically
+a normal text font) and
+math-family font number `<d4>` and slot `<d5><d6>` for the first successor of
+\"parentheses chain" implemented in the font (typically a special font).
+
+\begitems
+* \i delcode `\delcode<num>=<del-code>` sets the delimiter-code for the
+  ASCII character `<num>`.
+* \*\*\*\i Udelcode `\Udelcode<num>=<math-family><slot>` sets the
+  delimiter-code for the Unicode character `<num>` when a Unicode math font is
+  loaded. The font must implement the \"parentheses chain" at the `<slot>`
+  directly, we needn't to distinguish the basic size and the first
+  successor.
+\enditems
+
+\noindent{\bf Commands for using math-codes directly in math mode}
+
+\begitems
+* \i mathchar `\mathchar<math-code>` prints a math object given by math-code.
+* \*\*\*\i Umathchar `\Umathchar<class><math-family><slot>`
+  prints a math object given by math-code.
+* \i mathaccent `\mathaccent<math-code><object>` prints an accent above
+  `<object>` given by its math-code. The `<object>` can be single math
+  object or `{<math formula>}`.
+* \*\*\*\i Umathaccent `\Umathaccent<keyword><class><math-family><slot><object>`
+  creates an accent over `<object>` given by its math-code. The accent is
+  stretchable (relative to the width of the `<object>`) by default and if
+  the font implements the \"accents chain" at the `<slot>`. The optional
+  `<keyword>` is `fixed` (do not stretch the accent) or `bottom` (place
+  the accent to the bottom of the `<object>`).
+* \i delimiter `\delimiter<del-code>` prints a given delimiter, can be used after
+  `\left`, `\right`, `\middle`. The `<del-code>` can have seven hexadecimal
+  digits, first of them is class, others give normal `<del-code>`. The class
+  is used if the `\delimiter` doesn't follow `\left`, `\right`, `\middle`.
+* \*\*\*\i Udelimiter `\Udelimiter<class><math-family><slot>` behaves as
+  a character with given delimiter-code (after `\left`, `\right`) or as
+  a normal math character with its `<class>` (in other cases).
+* \i radical `\radical<radical-code><object>` creates radical symbol over
+  `<object>`. The `<radical-code>` is interpreted as `<del-code>`, i.e.\ the
+  first font must include the basic size and the second font must implement
+  the \"radicals chain".
+* \*\*\*\i Uradical `\Uradical<math-family><slot><object>` creates radical
+  symbol over `<object>`. The Unicode math font must implement the
+  \"radicals chain" at the `<slot>`.
+\enditems
+2
 \sec[plain] Summary of plain \TeX/ macros
 
 \noindent{\bf Allocators}
@@ -2115,7 +2213,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   `\ifsoemthing` which behaves like other `\if`\code{*} primitive commands.
 \enditems
 
-\noindent{\bf Vertical skips}
+\goodbreak\noindent{\bf Vertical skips}
 
 \begitems
 * \x`\bigskip` does \x`\vskip` by one line, \x`\medskip` does `\vskip` by
