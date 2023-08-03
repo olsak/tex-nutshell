@@ -145,8 +145,10 @@ There are four types of meanings of control sequences:
   tables, \i hbox `\hbox` creates a box in typesetting output).
 * the control sequence can be a \ii character/constant {\em character constant} 
   (declared by \i chardef `\chardef`
-  or \i mathchardef `\mathchardef` primitive command) or a font selector (declared
-  by \i font `\font` primitive command).
+  or \i mathchardef `\mathchardef` primitive command) or a
+  \ii character/equivalent {\em character equivalent}
+  (declared by \i let `\let`) or a {\em font selector}
+  (declared by \i font `\font` primitive command).
 * the control sequence can be a \ii macro {\em macro}. When it is read, it is
   replaced by its \ii replacement/text {\em replacement text} in the input queue. If there are more
   macros in the replacement text, all macros are replaced. This is called the 
@@ -1343,7 +1345,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
   The `/<expandafters>.`\z`{|<text>};` syntax rule enables us to prepare \z`|<text>;` by
   `\expandafter`(s). For example \i detokenize `\detokenize{\macro}` expands to
-  `\`\c{12}`m`\c{12}`a`\c{12}`c`\c{12}`r`\c{12}`o`\c{12}. But if you need to detokenize
+  `\`\c{12}`m`\c{12}`a`\c{12}`c`\c{12}`r`\c{12}`o`\c{12}{\Blue\char9251}\c{10}. If you need to detokenize
   the `<replacement text>` of the `\macro` then use
   `\detokenize\expandafter{\macro}`. Not only `\expandafter`s should be
   here. The expand processor does full expansion here until an opening brace 
