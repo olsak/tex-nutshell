@@ -147,7 +147,7 @@ There are four types of meanings of control sequences:
   (declared by \i chardef `\chardef`
   or \i mathchardef `\mathchardef` primitive command) or a
   \ii character/equivalent {\em character equivalent}
-  (declared by \i let `\let`) or a {\em font selector}
+  (declared by \i let `\let\sequence=<character>`) or a {\em font selector}
   (declared by \i font `\font` primitive command).
 * the control sequence can be a \ii macro {\em macro}. When it is read, it is
   replaced by its \ii replacement/text {\em replacement text} in the input queue. If there are more
@@ -1365,14 +1365,14 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 * \i if \z`\if<token 1><token 2>` is true if
   \begitems \removelastskip \style a 
-  * both tokens are characters with the same Unicode (or ASCII code in classical \TeX) or
+  * both tokens are the same characters or
   * both tokens are control sequences 
    (with arbitrary meaning but not \"the character") or
-  * one token is a character, second is a control sequence equal to the character (by `\let`) or
-  * both tokens are control sequences, their meaning (set by `\let`) is the same character code.
+  * one token is a character, second is a control sequence equal to this character (by `\let`) or
+  * both tokens are control sequences, their meaning (set by `\let`) is the same character.
   \enditems
-  \removelastskip
-  \noindent Example: you can say `\let\test=a` then `\if\test a` returns true.
+  In a), c) and d), only character codes are compared, no their category codes.\nl
+  Example: you can say `\let\test=a` then `\if\test a` returns true.
 
 * \i ifx \z`\ifx|<token 1><token 2>;` is true if the meanings of \z`<token 1>`
    and \z`<token 2>` are the same. 
