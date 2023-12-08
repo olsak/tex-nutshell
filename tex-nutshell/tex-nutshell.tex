@@ -1227,6 +1227,8 @@ detail).
 
 * \y`\mathsurround=0pt` is the space inserted around a formula in internal math mode.
 
+* \y`\displaywidth=*` includes the width of the line with display formula.
+
 * \y`\abovedisplayskip=12pt plus3pt minus9pt`,
   \y`\abovedisplayshortskip=0pt plus3pt`,
   \y`\belowdisplayskip=12pt plus3pt minus9pt`,
@@ -1253,6 +1255,9 @@ detail).
   situations respectively: opens output routine, paragraph, internal math mode, display
   math mode, {\noda\x`\vbox`, \x`\hbox`}, is at the end of a line in a table,
   at the end of an input file, or starts the job.
+
+* \y`\pdfpagewidth=210mm`, \y`\pdfpageheight=297mm` are PDF page dimensions
+  (implemented in pdf\TeX/ and its successors).
 \enditems
 
 \sec[expand] Expandable primitive commands
@@ -1289,7 +1294,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   of the `<tokens register>` without re-tokenizing and the expand processor 
   does not expand this output in {\noda`\edef`, `\write`, `\message`}, etc., arguments.
 
-* \i scantoken `\scantokens/<expandafters>.`\z`{|<text>};` re-tokenizes \z`<text>` using the actual
+* \i scantokens `\scantokens/<expandafters>.`\z`{|<text>};` re-tokenizes \z`<text>` using the actual
   tokenizer setting. The behavior is the same as when writing \z`<text>` to a 
   virtual file and reading this file immediately. 
 
@@ -1463,6 +1468,13 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   terminal and a headache for the user.
 
 * \*\*\*\i directlua \z`\directlua {<text>}` runs a Lua script given in \z`<text>`.
+
+* \*\*\*\i luaescapestring \z`\luaescapestring {<text>}` prepares `<text>`
+  for usage as Lua string (escapes `"` and `\`).
+
+* \*\*\*\i immediateassignment `\immediateassignment`,
+  \i immediateassigned \z`\immediateassigned {<code>}` do following assignment
+  (or assignments in `<code>`) expandable.
 
 \enditems
 
@@ -2012,6 +2024,8 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   The macro programmer can follow `\pdfsavepos` by the `\write` command and save
   these absolute positions to a text file which can be read in the next run
   of \TeX/ in order to get these absolute positions by macros. 
+* \x`\pdffeedback`, \x`\pdfextension`, \x`\pdfvariable` declare pdf\TeX/ 
+  \"primitives" in \LuaTeX.
 \enditems
 
 \noindent {\bf Microtypographical extensions}
@@ -2094,6 +2108,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 * \i eqno `$$<formula>\eqno<mark>$$` puts the `<mark>` to the right
   margin as `\llap{$<mark>$}`. Analogously, 
   \i leqno `$$<formula>\leqno<mark>$$` puts it to the left margin.
+* \x`\mkern`, \x`\mskip` work like `\kern`, `\hskip`, but dimensions are
+  set in `mu`=1/18`em` units.
+* \x`\nonscript` ignores following skip command if it is used in <S> or <SS> style.
 \enditems
 
 \noindent {\bf Commands for setting math codes and math-family fonts}\par\nobreak\medskip
@@ -2436,4 +2453,4 @@ Version of the text: 0.9 (\the\year-\thed\month-\thed\day)
 
 \break
 
-\end
+\bye
