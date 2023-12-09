@@ -55,6 +55,7 @@
 \def\yy #1#2={\i #2 \egroup `#1#2=}
 \def\z`{`\let<=\l}
 \let\_cslinkcolor=\Blue
+\def\q`#1`{\link[cs:\csstring#1]\Blue{\tt\string#1}}
 
 % tex-nutshell.pdf includes destinations to the explanation of the primitive
 % control sequences and plain TeX macros in the form: "cs:sequence". For example,
@@ -1382,6 +1383,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 * \i ifx \z`\ifx|<token 1><token 2>;` is true if the meanings of \z`<token 1>`
    and \z`<token 2>` are the same. 
 
+* \*\i ifcsname `\ifcsname<text>\endcsname` is true if the control sequance
+  `<text>` is declared.
+
 * \i ifnum `\ifnum<number 1><relation><number 2>`. The `<relation>` could be
   \code{<} or \code{=} or \code{>}. It returns true if the comparison of the two
   numbers is true.
@@ -1964,6 +1968,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 (available in pdf\TeX, \XeTeX/ and Lua\TeX)
 
 \begitems
+* \i pdfoutput `\pdfoutput` is numeric register. If its value is 1 then PDF format is geneerated.
 * \i pdfliteral \z`\pdfliteral{<text>}` puts the \z`<text>` interpreted 
   in a low level PDF language to the typesetting output. All PDF constructs
   defined in the PDF specification are allowed. The dimensions of
@@ -2026,6 +2031,23 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   of \TeX/ in order to get these absolute positions by macros. 
 * \x`\pdffeedback`, \x`\pdfextension`, \x`\pdfvariable` declare pdf\TeX/ 
   \"primitives" in \LuaTeX.
+* Moreover, \LuaTeX/ uses different names for several primitives:
+  {\spaceskip=.3em plus.7em minus.1em
+  \x`\pagewidth` is \q`\pdfpagewidth`,
+  \x`\pageheight` is \q`\pdfpageheight`,
+  \x`\outputmode` is \q`\pdfoutput`,
+  \x`\savepos` is \q`\pdfsavepos`,
+  \x`\lastxpos` is \q`\pdflastxpos`,
+  \x`\lastypos` is \q`\pdflastypos`,
+  \x`\outputmode` is \q`\pdfoutput`,
+  \x`\saveimageresource` is \q`\pdfximage`,
+  \x`\lastsavedimageresourceindex` is \q`\pdflastximage`,
+  \x`\useimageresource` is \q`\pdfrefximage`,
+  \x`\protrudechars` is \q`\pdfprotrudechars`,
+  \x`\normaldeviate` is \q`\pdfnormaldeviate`,
+  \x`\uniformdeviate` is \q`\pdfuniformdeviate`,
+  \x`\setrandomseed` is \q`\pdfsetrandomseed`.
+}
 \enditems
 
 \noindent {\bf Microtypographical extensions}
