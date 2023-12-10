@@ -1107,6 +1107,7 @@ value given by plain \TeX/ follows.
 
 * \y`\topskip=10pt` is the distance between the top of the page box and the baseline of
   the first line.
+  \y`\splittopskip=10pt` is the same for a box remainded after \q`\vsplit`.
 
 * \y`\linepenalty=10`,
   \y`\hyphenpenalty=50`,
@@ -1147,6 +1148,9 @@ value given by plain \TeX/ follows.
   \y`\vfuzz=0.1pt`
 are parameters for the paragraph building algorithm (not described here in
 detail).
+
+* \y`\uchyph=1`, if it is positive, then words with capital first letter can
+  be hyphenated. 
 
 * \y`\hbadness=1000`,
   \y`\vbadness=1000`. \TeX/ reports a warning about \iid badness on the terminal
@@ -1256,6 +1260,17 @@ detail).
   situations respectively: opens output routine, paragraph, internal math mode, display
   math mode, {\noda\x`\vbox`, \x`\hbox`}, is at the end of a line in a table,
   at the end of an input file, or starts the job.
+
+* \y`\maxdepth=4pt`, \y`\boxmaxdepth=\maxdimen`, \y`\splitmaxdepth=\maxdimen`
+  are maximal pagebox / ordinal `\vbox` / `\vsplit`ted box depth. If exeeds,
+  baseline si shifted down.  
+
+* \y`\delimiterfactor=901`, 
+  \y`\delimitershortfall=5pt` are parameters for calculating size of math delimiters.
+  \y`\nulldelimiterspace=1.2pt` is empty delimiter horizontal space. 
+
+* \y`\defaultskewchar=-1` sets a character in math font used for positioning math
+  accents. 
 
 * \y`\pdfpagewidth=210mm`, \y`\pdfpageheight=297mm` are PDF page dimensions
   (implemented in pdf\TeX/ and its successors).
@@ -1658,7 +1673,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   result of this operation. For example, you can say `\newbox\column`
   `\setbox\column=\vbox{...}` and later 
   `\setbox0=\vsplit\column to5cm`. The `\box0` is a `\vbox` containing the first 5cm of
-  saved material.
+  saved material. And the `\column` box includes the rest of the material.
 
 * \x`\lastbox` returns the last box in the current vertical or horizontal
   material and removes it. 
@@ -2029,6 +2044,14 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   The macro programmer can follow `\pdfsavepos` by the `\write` command and save
   these absolute positions to a text file which can be read in the next run
   of \TeX/ in order to get these absolute positions by macros. 
+\enditems
+
+\noindent {\bf Selected \LuaTeX/ primitives} 
+
+\noindent There are many additional primitives in \LuaTeX/, see its
+\ulink[https://www.pragma-ade.com/general/manuals/luatex.pdf]{documentation}.
+Only few of them are mentioned here.
+\begitems
 * \x`\pdffeedback`, \x`\pdfextension`, \x`\pdfvariable` declare pdf\TeX/ 
   \"primitives" in \LuaTeX.
 * Moreover, \LuaTeX/ uses different names for several primitives:
@@ -2047,7 +2070,16 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   \x`\normaldeviate` is \q`\pdfnormaldeviate`,
   \x`\uniformdeviate` is \q`\pdfuniformdeviate`,
   \x`\setrandomseed` is \q`\pdfsetrandomseed`.
-}
+  }
+* \x`\catcodetable`, \x`\initcatcodetable`, \x`\savecatcodetable`
+  do copy of whole catcode tables and enable to switch between them.
+* \x`\attributedef` declares a sequence as an attribute number. Similar like
+  \q`\countdef`.
+* \x`\suppressfontnotfounderror` and others switch on/off
+  error reporting in specified cases. 
+* \x`\matheqdirmode`, \x`\breakafterdirmode` one of many parameters for
+  right-to-left typesetting. 
+
 \enditems
 
 \noindent {\bf Microtypographical extensions}
@@ -2392,6 +2424,7 @@ math-family font number `<d4>` and slot `<d5><d6>` for the first successor of
   does the same but without worrying about floating objects.
 \enditems
 
+\filbreak
 \noindent{\bf Macros used in math modes}
 
 \begitems
