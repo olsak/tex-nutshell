@@ -1269,8 +1269,11 @@ detail).
   \y`\delimitershortfall=5pt` are parameters for calculating size of math delimiters.
   \y`\nulldelimiterspace=1.2pt` is empty delimiter horizontal space. 
 
-* \y`\defaultskewchar=-1` sets a character in math font used for positioning math
-  accents. 
+* \y`\defaultskewchar=-1` sets a character \x`\skewchar` in font used for positioning math
+  accents.
+
+* \x`\fontdimen``<number><font selector>` enables access to various values
+  of given font.
 
 * \y`\pdfpagewidth=210mm`, \y`\pdfpageheight=297mm` are PDF page dimensions
   (implemented in pdf\TeX/ and its successors).
@@ -1559,11 +1562,14 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   separated by a semicolon. The {\let\,=\relax `otfinfo -f <file name>.otf`} command 
   (on command line) can list them. 
   Lua\TeX/ supports alternative syntax: `{...}` instead of `"..."`.
-  Example: `\font\test={[texgyretermes-regular]:+onum;-liga} at12pt`. 
+  Example: `\font\test={[texgyretermes-regular]:+onum;-liga} at12pt`.
+  There is default font selector \x`\nullfont` which selects an \"empty font". 
 
 * \i let `\let|<control sequence>=<token>;` sets to the `<control sequence>`
   the same meaning as `<token>` has. The `<token>` can be whatever, a
   character or a control sequence.
+
+* \*\*\* \x`\glet` is equal to `\global\let`.
 
 * \i futurelet \z`\futurelet|<control sequence><token 1><token 2>;` works in two steps.
   In the first step it does \z`\let|<control sequence>=<token 2>;` and in the
@@ -2079,6 +2085,9 @@ Only few of them are mentioned here.
   error reporting in specified cases. 
 * \x`\matheqdirmode`, \x`\breakafterdirmode` one of many parameters for
   right-to-left typesetting. 
+* \x`\crampeddisplaystyle`, \x`\crampedtextstyle`,
+  \x`\crampedscriptstyle`,\nl \x`\crampedscriptscriptstyle`
+  is a reduced math style (below fraction line, for example).
 
 \enditems
 
