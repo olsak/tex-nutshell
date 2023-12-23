@@ -1343,6 +1343,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \value Peter     % expands to \dict:Peter which expands to 21. 
 \endtt
 
+* \*\*\*\i lastnamedcs `\lastnamedcs` is the last control sequence created by
+  `\csname ...\endcsname`.
+
 * \i expandafter \z`\expandafter|<token 1><token 2>;` does the transformation
   \z`<token 1><expanded token 2>`. Then \TeX/ processes `<token 1>` followed by
   `<expanded token 2>`. 
@@ -1488,6 +1491,9 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   is closed and reading continues from the place where `\input` of this file 
   was started. `\endinput` done in the main file causes future reading from the 
   terminal and a headache for the user.
+
+* \*\*\*\i Uchar \x`\Uchar``<number>` expands to a Unicode character
+  with given code <number>. (\XeTeX/ too).
 
 * \*\*\*\i directlua \z`\directlua {<text>}` runs a Lua script given in \z`<text>`.
 
@@ -1999,6 +2005,8 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   A good practice is to close \z`<text>` to `q...Q` PDF commands.
   The command `\pdfliteral` is typically 
   used for generating graphics and for linear transformation.
+* \i pdfsave \i pdfrestore `\pdfsave`, `\pdfrestore` saves and restores
+  PDF graphics stack (like `q`, `Q` PDF commands).
 * \i pdfcolorstack `\pdfcolorstack<number><op>`\z`{<text>}` (where `<op>` is `push`
   or `pop` or `set`) behaves like \z`\pdfliteral{<text>}` and it is used for
   color switchers. For example when \z`<text>` is `1 0 0 rg` then the red color is
