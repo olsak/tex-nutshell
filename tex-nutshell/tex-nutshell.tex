@@ -808,6 +808,11 @@ If the real parameter is in the form `{...}` then the outer
 braces are removed from the parameter. For example `\Test A{C..DEF G}.. H`
 reads `C..DEF G` to the `#2`.
 
+When reading an unseparated parameter, \TeX/ ignores spaces before first
+non-space token. Suppose for example `\def\m:#1{"#1"}`. Then both
+`\m:x` and `\m: x` print `"x"` and both `\m:{a b}` and `\m: {a b}`
+print `"a b"`.
+
 The separated parameter can bring a potential problem if the user forgets the
 delimiter or the delimiter is specified incorrectly. Then \TeX/ reports an
 error. This error is reported when the first \i par `\par` is scanned as part of the
