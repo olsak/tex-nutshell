@@ -1749,7 +1749,8 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 \noindent {\bf More commands for creating something in typesetting output}
 
 \begitems
-* \x`\par` closes horizontal mode and finalizes a paragraph.
+* \x`\par` closes horizontal mode and finalizes a paragraph. In vertical
+  mode, it does nothing.
 * \x`\indent`, \x`\noindent`. They leave vertical mode and open a paragraph
   with/without paragraph indentation. If horizontal mode is current then 
   `\indent` inserts an empty box of `\parindent` width; `\noindent` does
@@ -2067,9 +2068,6 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
 
 \noindent {\bf Selected \LuaTeX/ primitives} 
 
-\noindent There are many additional primitives in \LuaTeX/, see its
-\ulink[https://www.pragma-ade.com/general/manuals/luatex.pdf]{documentation}.
-Only few of them are mentioned here.
 \begitems
 * \x`\pdffeedback`, \x`\pdfextension`, \x`\pdfvariable` declare pdf\TeX/ 
   \"primitives" in \LuaTeX.
@@ -2101,8 +2099,12 @@ Only few of them are mentioned here.
 * \x`\crampeddisplaystyle`, \x`\crampedtextstyle`,
   \x`\crampedscriptstyle`,\nl \x`\crampedscriptscriptstyle`
   is a reduced math style (below fraction line, for example).
-
 \enditems
+
+There are many additional primitives in \LuaTeX/, see its
+\ulink[https://www.pragma-ade.com/general/manuals/luatex.pdf]{documentation}.
+Only few of them are mentioned here.
+\medskip
 
 \noindent {\bf Microtypographical extensions}
 (available in pdf\TeX/, Lua\TeX/ and not all of them in \XeTeX)
@@ -2526,7 +2528,7 @@ math-family font number `<d4>` and slot `<d5><d6>` for the first successor of
 \noindent
 Petr Olšák {\tt petr@olsak.net}\nl
 Czech Technical University in Prague\nl
-Version of the text: 0.9 (\the\year-\thed\month-\thed\day)
+Version of the text: 0.10 (\the\year-\thed\month-\thed\day)
 
 \break
 
