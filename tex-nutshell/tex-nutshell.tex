@@ -985,13 +985,13 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
 * The `<number>` could be 
 \begitems \style N
 * a register of counter type;
-* a character constant declared by \x`\chardef` or \x`\mathchardef` primitive command. 
-* an integer decimal number (with optional `+` or `-` prefixed)
+* a character constant declared by \x`\chardef` or \x`\mathchardef` primitive command;
+* an integer decimal number (with optional `+` or `-` prefixed);
 * {\let\,=\relax `"<hexa number>`} where `<hexa number>` can include digits
   `0123456789ABCDEF`\,;
 * {\let\,=\relax`'<octal number>`} where `<octal number>` can include digits 
   `01234567`\,;
-* {\let\,=\relax \code{`}`<character>`} (the prefix is the reverse single quote \code{`}). 
+* {\let\,=\relax \code{`}`<character>`} (the prefix is the reverse single quote \code{`});
   It returns the code of the `<character>`. Examples:
   \code{`}{`|A;`} or one-character control sequence \code{`}{`|\A;`}).
   Both examples represent the number 65. The Unicode of the character 
@@ -1008,7 +1008,7 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
   The rules 3)--6) can be terminated by one optional space.
 * The `<dimen>` could be
 \begitems \style N
-* a register of dimen type or counter type;
+* a register of dimen type;
 * a decimal number with an optional decimal point (and optional `+` or `-`
   prefixed) followed by `<dimen unit>`. The `<dimen unit>` is \ii pt `pt` (point)\fnote 
   {1\,pt = 1/72.27\,in $\doteq$ 0.35\,mm\,;\ 1\,pc = 12\,pt\,;\
@@ -1030,7 +1030,7 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
   The rule 2) can be terminated by one optional space.
 * The `<skip>` could be:
 \begitems \style -
-* a register of glue type or dimen type or counter type;
+* a register of glue type;
 * `<dimen>/plus<generalized dimen>. /minus<generalized dimen>.`. The 
   `<generalized dimen>` is the same as `<dimen>`, but normal `<dimen unit>` 
    or pseudo-unit `fil` or `fill` or `filll` can be used.
@@ -1045,6 +1045,12 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
 \enditems
 
 \removelastskip
+Moreower, `<number>` could be a register of dimen type or `\dimexpr`
+or a register of glue type. `<dimen>` could be a register of glue type.
+The conversion is done in such cases: a dimen value interpreted as
+`<number>` omits the `sp` unit, a glue value interpreted as `<dimen>`
+omits `plus` and `minus` componets.
+
 The main processor reads input tokens (from the output of activated or
 deactivated expand processor) in two contexts: 
 \ii do/something/context,context/do/something {\em do something} or {\em
@@ -2528,7 +2534,7 @@ math-family font number `<d4>` and slot `<d5><d6>` for the first successor of
 \noindent
 Petr Olšák {\tt petr@olsak.net}\nl
 Czech Technical University in Prague\nl
-Version of the text: 0.10 (\the\year-\thed\month-\thed\day)
+Version of the text: 0.10+ (\the\year-\thed\month-\thed\day)
 
 \break
 
