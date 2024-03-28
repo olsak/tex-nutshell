@@ -1034,6 +1034,8 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
 * `<dimen>/plus<generalized dimen>. /minus<generalized dimen>.`. The 
   `<generalized dimen>` is the same as `<dimen>`, but normal `<dimen unit>` 
    or pseudo-unit `fil` or `fill` or `filll` can be used.
+   When `plus` or `minus` parts are omited then these components have zero
+   value.
 \enditems
 * The `<toks>` could be
 \begitems \style -
@@ -1045,11 +1047,11 @@ type of the register (i.e.\ `<number>`, `<dimen>`, `<skip>` and `<toks>`) follow
 \enditems
 
 \removelastskip
-Moreower, `<number>` could be a register of dimen type or `\dimexpr`
+Moreover, `<number>` could be a register of dimen type or `\dimexpr`
 or a register of glue type. `<dimen>` could be a register of glue type.
 The conversion is done in such cases: a dimen value interpreted as
 `<number>` omits the `sp` unit, a glue value interpreted as `<dimen>`
-omits `plus` and `minus` componets.
+omits `plus` and `minus` components.
 
 The main processor reads input tokens (from the output of activated or
 deactivated expand processor) in two contexts: 
