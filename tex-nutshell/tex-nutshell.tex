@@ -1326,7 +1326,7 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   of the `<tokens register>` without re-tokenizing and the expand processor 
   does not expand this output in {\noda`\edef`, `\write`, `\message`}, etc., arguments.
 
-* \i scantokens `\scantokens/<expandafters>.`\z`{|<text>};` re-tokenizes \z`<text>` using the actual
+* \*\i scantokens `\scantokens/<expandafters>.`\z`{|<text>};` re-tokenizes \z`<text>` using the actual
   tokenizer setting. The behavior is the same as when writing \z`<text>` to a 
   virtual file and reading this file immediately. 
 
