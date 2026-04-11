@@ -2103,14 +2103,17 @@ If it is~a~Lua\TeX/ only command then three *** are prefixed.
   \q`\countdef`.
 * \x`\suppressfontnotfounderror` and others switch on/off
   error reporting in specified cases. 
-* \x`\matheqdirmode`, \x`\breakafterdirmode` one of many parameters for
-  right-to-left typesetting. 
 * \x`\crampeddisplaystyle`, \x`\crampedtextstyle`,
   \x`\crampedscriptstyle`,\nl \x`\crampedscriptscriptstyle`
   is a reduced math style (below fraction line, for example).
+* \x`\matheqdirmode`, \x`\breakafterdirmode` one of many parameters for
+  right-to-left typesetting.
 * \x`\textdirection`, \x`\pardirection`, \x`\bodydirection`, \x`\pagedirection`:
   if they are nonzero then different direction (from default left to right,
   bottom to top) of typesetting material is used.
+  For more information, see
+  \ulink[https://ctan.gust.org.pl/tex-archive/macros/luatex/latex/luabidi/luabidi.pdf\#section.5]
+  {chapter~5 of luabidi} documentation.
 \enditems
 
 There are many additional primitives in \LuaTeX/, see its
